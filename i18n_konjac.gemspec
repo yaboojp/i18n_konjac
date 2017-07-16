@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = I18nKonjac::VERSION
   s.authors     = ["yaboojp"]
   s.email       = ["yaboo.ja@gmail.com"]
-  s.homepage      = "https://github.com/rubysherpas/i18n_konjac"
+  s.homepage      = "https://github.com/yaboojp/i18n_konjac"
   s.summary       = %q{Add your ActiveRecord instance method, which is value translated by i18n locale }
   s.description   = <<-DSC
     i18n_konjac
