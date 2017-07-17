@@ -38,7 +38,7 @@ end
 
 ``` ruby
 class Blog < ActiveRecord::Base
-  acts_as_kojac
+  acts_as_konjac
 
   # ...
 end

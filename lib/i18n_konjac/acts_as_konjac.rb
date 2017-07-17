@@ -3,7 +3,7 @@ module I18nKonjac
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def acts_as_kojac(options={})
+      def acts_as_konjac(options={})
         include I18nKonjac::ActsAsKonjac::LocalInstanceMethods
 
         self.column_names.each do |column|
