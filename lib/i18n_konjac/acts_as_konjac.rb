@@ -7,20 +7,12 @@ module I18nKonjac
         include I18nKonjac::ActsAsKonjac::LocalInstanceMethods
 
         self.column_names.each do |column|
-          self.instance_eval do
-            define_method "#{column}_by_locale" do
-              if self.attribute_present?("#{current_prefix}#{column}")
-                val = self.send("#{current_prefix}#{column}")
-
-                # when value is empty.
-                val = self.send("#{column}") if val.blank?
-              else
-                # when column is undefine
-                val = self.send("#{column}") if val.blank?
-              end
-
-              val
+          define_method "#{column}_by_locale" do
+            val = if self.attribute_present?("#{current_prefix}#{column}")
+              self.send("#{current_prefix}#{column}")
             end
+
+            val.presence || self.send("#{column}")
           end
         end
       end
