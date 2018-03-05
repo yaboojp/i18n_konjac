@@ -6,6 +6,8 @@ module I18nKonjac
       def acts_as_konjac(options={})
         include I18nKonjac::ActsAsKonjac::LocalInstanceMethods
 
+        return unless ActiveRecord::Base.connection.table_exists? self.to_s.pluralize.underscore
+
         self.column_names.each do |column|
           define_method "#{column}_by_locale" do
             val = if self.attribute_present?("#{current_prefix}#{column}")
