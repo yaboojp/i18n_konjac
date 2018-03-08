@@ -3,18 +3,21 @@ module I18nKonjac
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def acts_as_konjac(options={})
+      def acts_as_konjac(*args)
         include I18nKonjac::ActsAsKonjac::LocalInstanceMethods
 
         return unless ActiveRecord::Base.connection.table_exists? self.to_s.pluralize.underscore
 
-        self.column_names.each do |column|
-          define_method "#{column}_by_locale" do
-            val = if self.attribute_present?("#{current_prefix}#{column}")
-              self.send("#{current_prefix}#{column}")
+        attrs = self.column_names
+        attrs = attrs + args if args.present?
+
+        attrs.each do |attr|
+          define_method "#{attr}_by_locale" do
+            val = if self.attribute_present?("#{current_prefix}#{attr}")
+              self.send("#{current_prefix}#{attr}")
             end
 
-            val.presence || self.send("#{column}")
+            val.presence || self.send("#{attr}")
           end
         end
       end
