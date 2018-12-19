@@ -6,7 +6,7 @@ module I18nKonjac
       def acts_as_konjac(*args)
         include I18nKonjac::ActsAsKonjac::LocalInstanceMethods
 
-        return unless ActiveRecord::Base.connection.table_exists? self.to_s.pluralize.underscore
+        return unless ActiveRecord::Base.connection.data_source_exists? self.to_s.pluralize.underscore
 
         attrs = self.column_names
         attrs = attrs + args if args.present?
